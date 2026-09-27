@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — ReviseHub</title>
+<meta name="description" content="Login">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d1117'/%3E%3Ctext x='32' y='45' font-family='monospace' font-size='36' font-weight='bold' text-anchor='middle' fill='%2339c5cf'%3ER%3C/text%3E%3C/svg%3E">
+<script>(function(){try{var t=localStorage.getItem('rh:theme')||'paper';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','paper');}})();</script>
+<link rel="stylesheet" href="assets/highlight.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/product.css">
+</head>
+<body data-tier="">
+<div class="scrim"></div>
+<header class="topbar">
+  <button class="iconbtn hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  <a class="brand" href="index.html">Revise<b>Hub</b></a>
+  <span class="spacer"></span>
+  <div class="actions">
+    <span class="userchip" id="userchip"></span>
+    <select class="iconbtn" id="theme-select" aria-label="Theme"><option value="light">Light</option><option value="dark">Dark</option><option value="nord">Nord</option><option value="dracula">Dracula</option><option value="solarized-light">Solarized Light</option><option value="solarized-dark">Solarized Dark</option><option value="paper">Paper</option></select>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar"><div class="side-search"><input id="q" type="search" placeholder="Search your notes  ( / )" autocomplete="off" aria-label="Search"></div><div class="side-block search-results" id="search-results"></div><div class="side-block"><h4>Menu</h4><ul class="side-list"><li><a href="#why">Why ReviseHub</a></li><li><a href="#library">What’s inside</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="login.html">Login</a></li></ul></div><div class="side-block" id="bookmarks" style="display:none"><h4>Bookmarks</h4><ul class="side-list" id="bookmarks-list"></ul></div><div class="side-foot"><a href="index.html">Home</a><a href="app.html">My library</a></div></aside>
+  <main class="content"><div class="auth-wrap">
+  <form class="auth-card" id="login-form">
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Log in to your ReviseHub library.</p>
+    <label>Username<input id="username" autocomplete="username" required></label>
+    <label>Password<input id="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn" type="submit">Login</button>
+    <p class="auth-err" id="login-err" role="alert"></p>
+    <p class="auth-foot">No account? <a href="index.html#pricing">Get access</a></p>
+  </form>
+</div></main>
+</div>
+<script src="assets/site-data.js"></script>
+<script src="assets/search-index.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* Code token colours — driven by the active theme's --tok-* variables,
+   so every theme (light, dark, nord, dracula, solarized, paper) recolours code. */
+.highlight { background: var(--code-bg); }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr { color: var(--tok-kw); font-weight: 600; }
+.highlight .ow { color: var(--tok-op); font-weight: 600; }
+.highlight .kt { color: var(--tok-type); }
+.highlight .nc, .highlight .nn, .highlight .nb, .highlight .bp, .highlight .no { color: var(--tok-type); }
+.highlight .nf, .highlight .fm, .highlight .nd { color: var(--tok-fn); }
+.highlight .n, .highlight .nx, .highlight .nl, .highlight .nv, .highlight .na { color: var(--tok-name); }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc,
+.highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx,
+.highlight .sr, .highlight .ss, .highlight .sa, .highlight .dl { color: var(--tok-str); }
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo,
+.highlight .mb, .highlight .mx, .highlight .il { color: var(--tok-num); }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs,
+.highlight .ch, .highlight .cp, .highlight .cpf { color: var(--tok-com); font-style: italic; }
+.highlight .o { color: var(--tok-op); }
+.highlight .p { color: var(--text); }
+.highlight .err { color: var(--tok-err); }
+.highlight .gd { color: var(--c-trap); }
+.highlight .gi { color: var(--c-golden); }
+.highlight .hll { background: var(--sel); display: block; }
