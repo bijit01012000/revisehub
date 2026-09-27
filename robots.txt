@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /basic/
+Disallow: /pro/
+Disallow: /max/
+Disallow: /admin

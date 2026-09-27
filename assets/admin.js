@@ -30,7 +30,11 @@
     }).join("");
 
     $("#recent-orders").innerHTML = rows(s.recentOrders || [], [["id", "Order"], ["username", "User"], ["plan", "Plan"], ["status", "Status"], ["amount", "Amount", inr], ["created_at", "Created", dt]]);
-    $("#recent-payments").innerHTML = rows(s.recentPayments || [], [["payment_id", "Payment"], ["order_id", "Order"], ["amount", "Amount", inr], ["status", "Status"], ["created_at", "Created", dt]]);
+    var pays = s.recentPayments || [];
+    $("#recent-payments").innerHTML = pays.length ? ('<table class="admin-table"><thead><tr><th>Payment</th><th>Order</th><th>Amount</th><th>Status</th><th>Created</th><th></th></tr></thead><tbody>' +
+      pays.map(function (p) { return '<tr><td>' + esc(p.payment_id) + '</td><td>' + esc(p.order_id) + '</td><td>' + esc(inr(p.amount)) + '</td><td>' + esc(p.status) + '</td><td>' + esc(dt(p.created_at)) + '</td>' +
+        '<td>' + (p.status === "refunded" ? "" : '<button class="mini-btn" data-refund="' + esc(p.payment_id) + '">Mark refunded</button>') + '</td></tr>'; }).join("") + '</tbody></table>') : '<div class="admin-empty">Nothing yet.</div>';
+    loadChart();
   }
 
   function rows(list, cols) {
@@ -64,6 +68,8 @@
     catch (ex) { alert(ex.message); loadUsers($("#user-q").value); }
   });
   document.addEventListener("click", async function (e) {
+    var rf = e.target.closest("button[data-refund]");
+    if (rf) { try { await api("api/admin/refund", { method: "POST", body: JSON.stringify({ payment_id: rf.dataset.refund }) }); flash("Marked refunded"); loadStats(); } catch (ex) { alert(ex.message); } return; }
     var b = e.target.closest("button[data-status]"); if (!b) return;
     var u = b.dataset.status, disable = b.textContent === "Disable";
     try { await api("api/admin/set-status", { method: "POST", body: JSON.stringify({ username: u, status: disable ? "disabled" : "active" }) }); flash(u + (disable ? " disabled" : " enabled")); loadUsers($("#user-q").value); }
@@ -78,6 +84,22 @@
   });
   var q = $("#user-q");
   if (q) { var timer; q.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(function () { loadUsers(q.value); }, 250); }); }
+
+  async function loadChart() {
+    var el = document.getElementById("admin-chart"); if (!el) return;
+    try {
+      var j = await api("api/admin/chart?days=14");
+      var days = j.days || [];
+      var maxS = Math.max(1, ...days.map(function (d) { return d.signups; }));
+      var maxR = Math.max(1, ...days.map(function (d) { return d.revenue; }));
+      el.innerHTML = days.map(function (d) {
+        var hs = Math.round((d.signups / maxS) * 60), hr = Math.round((d.revenue / maxR) * 60);
+        return '<div class="chart-col" title="' + d.date + ' · ' + d.signups + ' signups · ' + inr(d.revenue) + '">' +
+          '<div class="bars"><div class="bar s" style="height:' + (hs || 2) + 'px"></div><div class="bar r" style="height:' + (hr || 2) + 'px"></div></div>' +
+          '<div class="chart-x">' + d.date.slice(8) + '</div></div>';
+      }).join("") + '<div class="chart-legend"><span class="lg s"></span>signups <span class="lg r"></span>revenue</div>';
+    } catch (e) {}
+  }
 
   function flash(m) { if (!note) return; note.textContent = m; note.style.display = ""; setTimeout(function () { note.style.display = "none"; }, 2500); }
 

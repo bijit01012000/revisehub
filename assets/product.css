@@ -163,3 +163,20 @@
 .pill.on { background: var(--accent-soft); color: var(--c-golden); }
 .pill.off { background: var(--panel-2); color: var(--c-trap); }
 .mini, .mini-btn { height: 30px; border-radius: 7px; border: 1px solid var(--border); background: var(--panel); color: var(--text); font-size: 13px; padding: 0 8px; cursor: pointer; }
+
+
+/* ================= account + chart ================= */
+.account-wrap { max-width: 640px; margin: 0 auto; padding: 36px 22px 90px; }
+.account-wrap h1 { margin: 0 0 10px; font-size: 28px; color: var(--heading); }
+.acc-line { color: var(--text); margin: 4px 0; }
+.admin-hint { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+.chart { display: flex; align-items: flex-end; gap: 6px; border: 1px solid var(--border); border-radius: 12px; padding: 14px 12px 8px; background: var(--panel); overflow-x: auto; }
+.chart-col { flex: 1; min-width: 22px; text-align: center; }
+.bars { display: flex; align-items: flex-end; justify-content: center; gap: 2px; height: 60px; }
+.bar { width: 7px; border-radius: 3px 3px 0 0; }
+.bar.s { background: var(--accent); }
+.bar.r { background: var(--c-golden); }
+.chart-x { font-size: 10px; color: var(--muted); margin-top: 4px; font-family: "SF Mono", monospace; }
+.chart-legend { align-self: center; margin-left: 10px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.lg { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin: 0 4px 0 8px; }
+.lg.s { background: var(--accent); } .lg.r { background: var(--c-golden); }
